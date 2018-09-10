@@ -259,6 +259,11 @@ nice_interfaces_get_local_ips (gboolean include_loopback)
     if (ifa->ifa_addr == NULL)
       continue;
 
+#ifdef DISABLE_IPV6
+    if (ifa->ifa_addr->sa_family == AF_INET6)
+      continue;
+#endif
+
     /* Convert to a string. */
     addr_string = sockaddr_to_string (ifa->ifa_addr);
     if (addr_string == NULL) {
@@ -351,6 +356,10 @@ nice_interfaces_get_local_ips (gboolean include_loopback)
       continue;  /* failed to get flags, skip it */
     }
     sa = (struct sockaddr_in *) &ifr->ifr_addr;
+#ifdef DISABLE_IPV6
+    if (sa->sa_family == AF_INET6)
+      continue;
+#endif
     nice_debug ("Interface:  %s", ifr->ifr_name);
     nice_debug ("IP Address: %s", inet_ntoa (sa->sin_addr));
     if ((ifr->ifr_flags & IFF_LOOPBACK) == IFF_LOOPBACK){

@@ -89,12 +89,9 @@ GTKDOC_LIBS= $(top_builddir)/agent/libagent.la $(GLIB_LIBS) $(top_builddir)/stun
 	 $(GUPNP_LIBS)
 
 
-# This includes the standard gtk-doc make rules, copied by gtkdocize.
-include $(top_srcdir)/gtk-doc.make
-
 # Other files to distribute
 # e.g. EXTRA_DIST += version.xml.in
-EXTRA_DIST += states.gv
+EXTRA_DIST = states.gv
 
 # Files not to distribute
 # for --rebuild-types in $(SCAN_OPTIONS), e.g. $(DOC_MODULE).types

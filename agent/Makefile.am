@@ -9,6 +9,7 @@
 include $(top_srcdir)/common.mk
 
 AM_CFLAGS = \
+	-DDISABLE_IPV6 \
 	-DG_LOG_DOMAIN=\"libnice\" \
 	$(LIBNICE_CFLAGS) \
 	$(GLIB_CFLAGS) \
